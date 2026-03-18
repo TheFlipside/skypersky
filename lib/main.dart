@@ -14,7 +14,9 @@ class SkyperkyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Skypersky',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
+      theme: ThemeData.dark().copyWith(
+        textTheme: ThemeData.dark().textTheme.apply(fontFamily: 'OpenSans'),
+      ),
       home: const ProtectionScreen(),
     );
   }
@@ -62,8 +64,8 @@ class _ProtectionScreenState extends State<ProtectionScreen> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFF3A4D3A),
-              Color(0xFF222E22),
+              Color(0xFF2D5649),
+              Color(0xFF26413B),
             ],
           ),
         ),
@@ -71,7 +73,7 @@ class _ProtectionScreenState extends State<ProtectionScreen> {
           children: [
             // Shield watermark anchored to left edge, half hidden
             Positioned(
-              left: -150,
+              left: -100,
               top: 0,
               bottom: 0,
               child: Center(
@@ -97,7 +99,7 @@ class _ProtectionScreenState extends State<ProtectionScreen> {
                       fontWeight: FontWeight.w300,
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 6),
                   _ProtectionSwitch(
                     isActive: _isProtectionEnabled,
                     onChanged: (value) =>
@@ -138,7 +140,7 @@ class _ProtectionSwitch extends StatelessWidget {
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(19),
-          color: isActive ? Colors.green : Colors.grey.shade600,
+          color: isActive ? Colors.green : Colors.grey.shade300,
         ),
         child: Stack(
           children: [
@@ -149,9 +151,11 @@ class _ProtectionSwitch extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: Icon(
-                  isActive ? Icons.verified_user : Icons.shield_outlined,
+                  isActive
+                      ? Icons.verified_user
+                      : Icons.gpp_maybe,
                   color: isActive
-                      ? Colors.green.shade800
+                      ? Colors.white
                       : Colors.grey.shade400,
                   size: 20,
                 ),
