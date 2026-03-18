@@ -1,4 +1,4 @@
-package com.example.skypersky
+package com.luminaapps.skypersky
 
 import io.flutter.embedding.android.FlutterActivity
 
