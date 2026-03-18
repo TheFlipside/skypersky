@@ -1,6 +1,6 @@
 {
-    "name": "skypersky",
-    "short_name": "skypersky",
+    "name": "Skypersky",
+    "short_name": "Skypersky",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
