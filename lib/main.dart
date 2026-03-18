@@ -1,4 +1,8 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const SkyperkyApp());
@@ -11,13 +15,34 @@ class SkyperkyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Skypersky',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
-        textTheme: ThemeData.dark().textTheme.apply(fontFamily: 'OpenSans'),
+    final quitModifier =
+        defaultTargetPlatform == TargetPlatform.macOS
+            ? LogicalKeyboardKey.meta
+            : LogicalKeyboardKey.control;
+
+    final isMacOS =
+        quitModifier == LogicalKeyboardKey.meta;
+
+    return CallbackShortcuts(
+      bindings: {
+        SingleActivator(
+          LogicalKeyboardKey.keyQ,
+          meta: isMacOS,
+          control: !isMacOS,
+        ): () => unawaited(SystemNavigator.pop()),
+      },
+      child: Focus(
+        autofocus: true,
+        child: MaterialApp(
+          title: 'Skypersky',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData.dark().copyWith(
+            textTheme:
+                ThemeData.dark().textTheme.apply(fontFamily: 'OpenSans'),
+          ),
+          home: const ProtectionScreen(),
+        ),
       ),
-      home: const ProtectionScreen(),
     );
   }
 }
